@@ -1,6 +1,6 @@
 # Minishell İş Bölümü Stratejisi
 
-## 👤 KİŞİ 1: Frontend & Parsing
+## 👤 KİŞİ 1: Frontend & Parsing (Ön Uç & Ayrıştırma)
 
 ### Ana Sorumluluklar
 - **Lexical Analysis (Tokenization)**
@@ -13,12 +13,12 @@
   - Pipe chain'leri parse etme
   - Redirection'ları belirleme
 
-- **Environment Variable Expansion**
+- **Environment Variable Expansion (Ortam Değişkeni Genişletme)**
   - `$VAR` expansion
   - `$?` exit status handling
   - Quote içindeki expansion kuralları
 
-- **Signal Handling**
+- **Signal Handling (Sinyal Yönetimi)**
   - Ctrl-C, Ctrl-D, Ctrl-\ handling
   - Global signal variable yönetimi
   - Interactive mode davranışları
@@ -47,15 +47,15 @@ void setup_signals(void);
 
 ---
 
-## 👤 KİŞİ 2: Backend & Execution
+## 👤 KİŞİ 2: Backend & Execution (Arka Uç & Yürütme)
 
 ### Ana Sorumluluklar
-- **Command Execution**
+- **Command Execution (Komut Yürütme)**
   - Process creation (fork/execve)
   - PATH variable ile executable bulma
   - Wait/waitpid ile process management
 
-- **Built-in Commands**
+- **Built-in Commands (Dahili Komutlar)**
   - echo, cd, pwd, export, unset, env, exit
   - Her built-in için error handling
   - Environment variable yönetimi
@@ -65,7 +65,7 @@ void setup_signals(void);
   - Process chain management
   - Pipe creation ve cleanup
 
-- **Redirections**
+- **Redirections (Yönlendirmeler)**
   - Input/Output redirections (<, >)
   - Append mode (>>)
   - Here document (<<)
