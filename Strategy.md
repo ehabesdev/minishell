@@ -45,11 +45,6 @@ char *expand_variables(char *str, char **env);
 void setup_signals(void);
 ```
 
-### Zaman Planı
-- **Hafta 1:** Tokenizer ve basic parsing
-- **Hafta 2:** Quote handling ve variable expansion
-- **Hafta 3:** Signal handling ve edge cases
-
 ---
 
 ## 👤 KİŞİ 2: Backend & Execution
