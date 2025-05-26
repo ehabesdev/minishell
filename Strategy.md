@@ -111,23 +111,34 @@ int builtin_exit(char **argv);
 ```
 minishell/
 ├── includes/
-│   ├── minishell.h          # Ortak header
-│   ├── parsing.h            # Kişi 1
-│   └── execution.h          # Kişi 2
+│   ├── minishell.h          // Ana header: tüm tanımlar, prototipler, system includes
+│   ├── parsing.h            // Parser modülü: tokenizer, expander, signal prototipler
+│   └── execution.h          // Executor modülü: builtin, pipe, redirect prototipler
 ├── src/
-│   ├── main.c               # Ortak
-│   ├── parsing/             # Kişi 1
-│   │   ├── tokenizer.c
-│   │   ├── parser.c
-│   │   ├── expander.c
-│   │   └── signals.c
-│   ├── execution/           # Kişi 2
-│   │   ├── executor.c
-│   │   ├── pipes.c
-│   │   ├── redirections.c
+│   ├── main.c               // Ana program: shell loop, readline, history yönetimi
+│   ├── parsing/             
+│   │   ├── tokenizer.c      // Input'u token'lara ayırma, quote handling
+│   │   ├── parser.c         // Token'ları command structure'a dönüştürme
+│   │   ├── expander.c       // $VAR, $? expansion, variable substitution
+│   │   └── signals.c        // Ctrl-C, Ctrl-D, Ctrl-\ signal handling
+│   ├── execution/           
+│   │   ├── executor.c       // Fork/execve, PATH search, process management
+│   │   ├── pipes.c          // Pipe creation, inter-process communication
+│   │   ├── redirections.c   // <, >, <<, >> file redirection handling
 │   │   └── builtins/
-│   └── utils/               # Ortak utility fonksiyonlar
-└── Makefile
+│   │       ├── builtin_echo.c    // echo komutu, -n option handling
+│   │       ├── builtin_cd.c      // cd komutu, PWD/OLDPWD güncelleme
+│   │       ├── builtin_pwd.c     // pwd komutu, getcwd ile current dir
+│   │       ├── builtin_export.c  // export komutu, env var creation/modification
+│   │       ├── builtin_unset.c   // unset komutu, env var removal
+│   │       ├── builtin_env.c     // env komutu, environment variable listing
+│   │       └── builtin_exit.c    // exit komutu, shell termination, cleanup
+│   └── utils/               
+│       ├── utils_string.c   // String manipulation: split, join, compare
+│       ├── utils_memory.c   // Memory management: safe malloc/free, cleanup
+│       ├── utils_env.c      // Environment utilities: search, copy, modify
+│       └── utils_error.c    // Error handling: messages, codes, debug
+└── Makefile                 // Compilation rules, linking, clean targets
 ```
 
 ---
