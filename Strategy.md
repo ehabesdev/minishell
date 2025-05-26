@@ -97,7 +97,6 @@ int builtin_exit(char **argv);
 - **Memory Management:** Kendi modüllerindeki memory leak'leri
 - **Error Handling:** Robust error checking
 - **Testing:** Kendi modülleri için test case'ler
-- **Documentation:** Code documentation ve README
 
 ### Integration Görevleri
 - Main loop implementasyonu (birlikte)
