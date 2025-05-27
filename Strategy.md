@@ -23,28 +23,6 @@
   - Global signal variable yönetimi
   - Interactive mode davranışları
 
-### Deliverables
-```c
-// Ana strukturlar
-typedef struct s_token {
-    char *value;
-    enum e_token_type type;
-    struct s_token *next;
-} t_token;
-
-typedef struct s_cmd {
-    char **argv;
-    t_redirect *redirects;
-    struct s_cmd *next;
-} t_cmd;
-
-// Ana fonksiyonlar
-t_token *tokenize(char *input);
-t_cmd *parse_commands(t_token *tokens);
-char *expand_variables(char *str, char **env);
-void setup_signals(void);
-```
-
 ---
 
 ## 👤 KİŞİ 2: Backend & Execution (Arka Uç & Yürütme)
@@ -70,25 +48,6 @@ void setup_signals(void);
   - Append mode (>>)
   - Here document (<<)
 
-### Deliverables
-```c
-// Ana fonksiyonlar
-int execute_command(t_cmd *cmd, char ***env);
-int execute_pipeline(t_cmd *pipeline, char ***env);
-int execute_builtin(char **argv, char ***env);
-void setup_redirections(t_redirect *redirects);
-int create_pipes(t_cmd *pipeline);
-
-// Built-in fonksiyonlar
-int builtin_echo(char **argv);
-int builtin_cd(char **argv, char ***env);
-int builtin_pwd(void);
-int builtin_export(char **argv, char ***env);
-int builtin_unset(char **argv, char ***env);
-int builtin_env(char **env);
-int builtin_exit(char **argv);
-```
-
 ---
 
 ## 🔄 Ortak Sorumluluklar
@@ -99,7 +58,7 @@ int builtin_exit(char **argv);
 - **Testing:** Kendi modülleri için test case'ler
 
 ### Integration Görevleri
-- Main loop implementasyonu (birlikte)
+- Main loop implementasyonu
 - Data structure'ların finalize edilmesi
 - Cross-module testing
 - Norm kontrolü
@@ -139,32 +98,6 @@ minishell/
 │       ├── utils_env.c      // Environment utilities: search, copy, modify
 │       └── utils_error.c    // Error handling: messages, codes, debug
 └── Makefile                 // Compilation rules, linking, clean targets
-```
-
----
-
-## 🤝 Interface Tanımları
-
-### Parser → Executor
-```c
-// Parser'ın Executor'a vereceği data structure
-typedef struct s_pipeline {
-    t_cmd *commands;
-    int cmd_count;
-} t_pipeline;
-
-// Ana interface fonksiyonu
-int execute_pipeline(t_pipeline *pipeline, char ***env);
-```
-
-### Shared Utilities
-```c
-// Ortak kullanılacak utility fonksiyonlar
-char **split_string(char *str, char delimiter);
-void free_string_array(char **arr);
-char *ft_getenv(char *name, char **env);
-char **env_add_var(char **env, char *name, char *value);
-char **env_remove_var(char **env, char *name);
 ```
 
 ---
